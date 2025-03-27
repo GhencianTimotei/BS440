@@ -265,9 +265,9 @@ def connect_device(address):
     while not device_connected and tries > 0:
         try:
             # address: MAC address of the scale
-            # 8: ?
+            # 8: Timeout
             # addresstype: ?
-            device = adapter.connect(address, 8, addresstype)
+            device = adapter.connect(address, 2, addresstype)
             device_connected = True
         except pygatt.exceptions.NotConnectedError:
             tries -= 1
@@ -422,7 +422,7 @@ while True:
                 continue_comms = False
             if continue_comms:
                 log.info('Waiting for notifications for another 30 seconds')
-                time.sleep(30)
+                time.sleep(3)
                 try:
                     device.disconnect()
                 except pygatt.exceptions.NotConnectedError:
